@@ -238,7 +238,6 @@ See **[ROADMAP.md](ROADMAP.md)** for the full 8-week (2-month) delivery plan.
 - **[ROADMAP.md](ROADMAP.md)** — the full 8-week (2-month) Agile plan for a 4-person
   learning team: every feature and its tests, sprint by sprint.
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** — layered system design, state machine, event flow.
-- **[FAQ.md](FAQ.md)** — Q&A for presentations / viva defence.
 
 ---
 
