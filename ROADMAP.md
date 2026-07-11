@@ -1,190 +1,298 @@
 # NoLoop — Delivery Roadmap & Agile Plan
 
-**Goal: build the complete platform in 2 months (8 weeks).** Everything — separate sites
-per stakeholder, the WhatsApp patient bot, all four AI agents, RAG, fraud detection, UPI
-settlement, and a full test suite — ships inside this window.
+**Goal: build the complete platform in 2 months (8 weeks).** Everything — separate sites per stakeholder, the WhatsApp patient bot, all four AI agents, RAG, fraud detection, UPI settlement, and a full test suite — ships inside this window.
 
-This is an **intense but achievable** plan for a **team of 4 who are learning while
-building**. It stays doable three ways: **each person owns a lane** so work runs in
-parallel, we **lean on managed services** (Supabase, Groq, WhatsApp Business API,
-hosted UPI) instead of building infra, and **testing is woven into every sprint** — not
-saved for the end.
+This is an **intense but achievable** plan for a **team of 4 who are learning while building**. It stays doable three ways:
 
-> **North star (end of Week 8):** a claim runs the full journey live —
-> *Hospital submits → AI proofs & summarises → rules + fraud check → insurer approves →
-> UPI settles → patient tracked on WhatsApp* — with tests green and the app deployed.
+- **Each person owns a lane** so work runs in parallel.
+- We **lean on managed services** (Supabase, Groq, WhatsApp Business API, hosted UPI) instead of building infrastructure.
+- **Testing is built into every sprint**, not left until the end.
 
----
-
-## 1. How we work
-
-### Cadence
-
-| Ceremony            | When                | Duration  | Purpose                              |
-| ------------------- | ------------------- | --------- | ------------------------------------ |
-| **Daily standup**   | Every working day   | 10–15 min | Yesterday / today / blockers         |
-| **Weekly catch-up** | Every Friday        | 45–60 min | Demo, retro, plan the coming week    |
-| **Sprint = 2 weeks**| —                   | —         | 4 sprints across the 8 weeks         |
-
-### Standup: 3 questions
-1. What did I finish?  2. What am I doing today?  3. What's blocking me?
-Blocked > 2 hours → pair up immediately. With this timeline, nobody stays stuck.
-
-### Weekly catch-up
-Demo what works → quick retro (well / hard / one change) → plan next week.
-
-### Definition of Done — **tests are part of Done**
-A story is done when it: works when clicked through · **has unit tests for its logic** ·
-**has an integration/E2E test if it crosses services** · is merged to main · passes CI ·
-was reviewed by a teammate. No "we'll test it later."
-
-### Team of 4 — one lane each (pair across lanes when blocked)
-- **FE A** — Hospital site + Admin site
-- **FE B** — Insurer site (+ TPA role) + Patient dashboard
-- **BE** — API, shared claim record, orchestrator, rules engine, UPI, queue
-- **AI** — WhatsApp bot, the 4 AI agents, OCR, RAG, fraud
-
-Lanes run in parallel every sprint. Swap a task occasionally so everyone learns the
-whole system — but on this timeline, depth-in-your-lane comes first.
-
-### Learning without losing time
-Do a **short spike first** (a few hours, not days) when a tool is new — a quick tutorial
-or throwaway proof of concept — then build for real. Prefer the boring, well-documented
-option over the clever one.
+> **North Star (End of Week 8):**
+>
+> *Hospital submits → AI proofs & summarises → Rules & fraud check → Insurer approves → UPI settles → Patient receives WhatsApp updates*
+>
+> Everything is deployed and the complete test suite is green.
 
 ---
 
-## 2. The 8-week map
+# 1. How We Work
 
-| Sprint | Weeks | Theme | Ships |
-| ------ | ----- | ----- | ----- |
-| **1** | 1–2 | Sites, data model, rules, CI | Separate sites live, shared claim record, rules engine, WhatsApp "hello", test+CI setup |
-| **2** | 3–4 | Claim flow + first agents | Submit → orchestrated review → approve/reject, Query-Proofing Agent, OCR, status tracking, WhatsApp notifications |
-| **3** | 5–6 | Full intelligence + settlement | Adjudication + Fraud agents, RAG, confidence scoring, UPI settlement, patient dashboard, two-way WhatsApp |
-| **4** | 7–8 | Complete, harden, launch | TPA, event bus, Redis, analytics, white-label, full test pyramid, security, Docker, CI/CD, deploy |
+## Cadence
 
-Phase 0 (already done): auth, RBAC, multi-tenant, portal scaffolds, backends, AI scaffold.
+| Ceremony | When | Duration | Purpose |
+|----------|------|----------|---------|
+| **Weekly Team Sync** | Every Friday | **15–20 min** | Progress updates, blockers, quick demo, plan next week |
+| **Sprint** | Every 2 weeks | — | Four sprints across eight weeks |
 
 ---
 
-## 3. Sprint 1 (Weeks 1–2) — Sites, data model, rules, CI
+## Weekly Team Sync (15–20 min)
+
+Each member answers:
+
+1. What did I complete this week?
+2. What will I work on next week?
+3. Any blockers or help needed?
+
+If someone is blocked, pair immediately after the meeting instead of waiting another week.
+
+Keep the meeting short and focused.
+
+---
+
+## Definition of Done
+
+A story is considered **Done** only when it:
+
+- Works end-to-end
+- Includes appropriate **unit tests**
+- Includes an **integration/E2E test** if multiple services are involved
+- Passes CI
+- Is reviewed by another teammate
+- Is merged into `main`
+
+No feature is "done" if testing is postponed.
+
+---
+
+## Team Ownership
+
+Each person owns one primary lane.
+
+| Owner | Responsibility |
+|--------|----------------|
+| **FE A** | Hospital Site + Admin Site |
+| **FE B** | Insurer Site (+TPA) + Patient Dashboard |
+| **Backend** | APIs, Database, Workflow, Rules Engine, Queue, UPI |
+| **AI** | WhatsApp Bot, OCR, RAG, AI Agents, Fraud Detection |
+
+Work happens **in parallel** every sprint.
+
+If someone gets blocked, another teammate pairs with them until the blocker is removed.
+
+---
+
+## Learning While Building
+
+Whenever using a new technology:
+
+- Spend **a few hours** creating a small proof of concept.
+- Learn the basics.
+- Throw the prototype away.
+- Build the real feature.
+
+Prefer simple, documented solutions over clever ones.
+
+---
+
+# 2. Eight Week Roadmap
+
+| Sprint | Weeks | Theme | Deliverables |
+|---------|------|-------|--------------|
+| **Sprint 1** | 1–2 | Foundation | Sites, database, rules engine, CI, WhatsApp setup |
+| **Sprint 2** | 3–4 | Claim Flow | Submission workflow, OCR, first AI agent |
+| **Sprint 3** | 5–6 | Intelligence | RAG, fraud detection, UPI settlement, patient dashboard |
+| **Sprint 4** | 7–8 | Production Ready | Security, analytics, deployment, testing, launch |
+
+---
+
+# 3. Sprint 1 (Weeks 1–2)
+
+## Foundation
 
 | Story | Owner | Tests |
-| ----- | ----- | ----- |
-| Split hospital & insurer into their own sites sharing one UI library (admin already separate) | FE A/B | Smoke render tests |
-| Login/JWT working across all sites | FE | Auth unit tests |
-| Expand Prisma schema: claim, documents, decision, fraud flag, events (shared claim record) | BE | Schema/migration check |
-| Migrate + seed demo orgs, policies, patients, beds, historical claims | BE | Seed sanity test |
-| **Rules engine** (coverage / limits / exclusions / co-pay) | BE | Unit tests per rule |
-| WhatsApp bot: send one test message (sandbox) | AI | Sandbox send test |
-| **Set up testing + CI**: Jest (FE/Node), pytest (Python), GitHub Actions runs tests on push | All | The pipeline itself |
+|-------|------|------|
+| Split Hospital & Insurer into separate sites sharing one UI library | FE A/B | Smoke render tests |
+| Login & JWT across all sites | FE | Authentication unit tests |
+| Expand Prisma schema (Claim, Documents, Decisions, Fraud Flags, Events) | Backend | Migration verification |
+| Seed demo hospitals, insurers, patients, policies | Backend | Seed validation |
+| Rules Engine (coverage, exclusions, co-pay, limits) | Backend | Rule unit tests |
+| WhatsApp sandbox message | AI | Sandbox send test |
+| Setup Jest, Pytest & GitHub Actions | All | CI pipeline verification |
 
-**End of Sprint 1:** all sites run, a claim record exists, rules evaluate, CI is green.
+### Sprint 1 Goal
+
+- Separate sites running
+- Shared claim record working
+- Rules engine operational
+- CI pipeline green
 
 ---
 
-## 4. Sprint 2 (Weeks 3–4) — Claim flow + first agents
+# 4. Sprint 2 (Weeks 3–4)
+
+## Claim Flow
 
 | Story | Owner | Tests |
-| ----- | ----- | ----- |
-| Hospital site: claim submission form → saves to shared record | FE A / BE | Integration: submit persists |
-| **Workflow orchestrator** (state machine): Submitted → Review → Approved/Rejected | BE | State-transition unit tests (reject illegal moves) |
-| **Query-Proofing Agent** (LLM checks docs vs policy before submit) | AI | Agent unit tests + fixtures |
-| OCR + structured extraction from uploaded documents | AI | Extraction accuracy test |
-| Insurer site: review queue + approve / reject / **override** with reason | FE B / BE | Integration: decision persists |
-| Hospital site: track claim status | FE A | UI + read test |
-| WhatsApp notifications fire on status change | AI / BE | Notification-hook test |
+|-------|------|------|
+| Hospital claim submission | FE A + Backend | Submission integration test |
+| Workflow orchestrator (Submitted → Review → Approved/Rejected) | Backend | State transition tests |
+| Query-Proofing Agent | AI | Agent evaluation tests |
+| OCR document extraction | AI | Extraction tests |
+| Insurer review queue & decisions | FE B + Backend | Decision persistence tests |
+| Claim status tracking | FE A | UI tests |
+| WhatsApp notifications | AI + Backend | Notification tests |
 
-**End of Sprint 2:** a claim goes submit → AI-proofed → insurer decides → status tracked
-→ patient notified. Integration test covers the happy path.
+### Sprint 2 Goal
+
+Complete claim journey:
+
+Submit → AI validation → Review → Decision → Status updates → WhatsApp notification
 
 ---
 
-## 5. Sprint 3 (Weeks 5–6) — Full intelligence + settlement
+# 5. Sprint 3 (Weeks 5–6)
+
+## AI + Settlement
 
 | Story | Owner | Tests |
-| ----- | ----- | ----- |
-| **Adjudication Assistant**: plain-English case summary for insurer | AI | Summary unit tests |
-| **Confidence scoring** → auto-decide high confidence, route rest to human | AI/BE | Threshold/routing tests |
-| **Fraud Detection Agent**: explainable risk score | AI | Fraud-rule tests + labelled set |
-| **RAG** over 3 knowledge bases (policy docs, billing benchmarks, insurance rules) | AI | RAG eval harness (accuracy vs answers) |
-| **Communication Agent**: two-way WhatsApp Q&A ("Is my implant covered?") with clause citations | AI | Q&A eval tests |
-| **UPI settlement** (insurer → hospital on approval) | BE | Settlement integration test (sandbox) |
-| Patient **dashboard** (minimal claim timeline) | FE B | UI + read test |
-| Queue for async AI processing | BE | Queue job test |
+|-------|------|------|
+| Adjudication Assistant | AI | Summary tests |
+| Confidence scoring | AI + Backend | Routing tests |
+| Fraud Detection Agent | AI | Fraud evaluation |
+| RAG over policy, billing & insurance knowledge | AI | Retrieval evaluation |
+| Communication Agent (WhatsApp Q&A) | AI | Response evaluation |
+| UPI settlement | Backend | Sandbox integration |
+| Patient dashboard | FE B | UI tests |
+| Async processing queue | Backend | Queue tests |
 
-**End of Sprint 3:** every AI agent works, RAG grounds answers, approvals settle over
-UPI, patient sees a timeline. **First full end-to-end (E2E) test passes.**
+### Sprint 3 Goal
+
+Every AI agent works.
+
+RAG is grounded.
+
+Payments settle.
+
+Patient dashboard works.
+
+**First complete End-to-End test passes.**
 
 ---
 
-## 6. Sprint 4 (Weeks 7–8) — Complete, harden, launch
+# 6. Sprint 4 (Weeks 7–8)
+
+## Hardening & Launch
 
 | Story | Owner | Tests |
-| ----- | ----- | ----- |
-| TPA role in insurer site (dedicated site only if time allows) | FE B / BE | Role-access tests |
-| Event bus + webhooks into hospital/insurer systems | BE | Event fan-out + webhook tests |
-| Redis cache (sessions, policy lookups, status) | BE | Cache hit/miss test |
-| Analytics / TAT & metrics dashboards | FE/BE | Metrics endpoint tests |
-| White-label subdomains (`apollo.noloop.in`) | BE | Routing test |
-| **Full test pyramid**: unit + integration + **E2E** (submit → decide → settle → notify) | All | The suite itself |
-| **Accuracy** eval on AI · **performance** (load) · **security** review (authz, tenancy, secrets, consent) | All | Eval + load + security checks |
-| Dockerize all services + CI/CD deploy on merge | All | CI build + deploy test |
-| Monitoring & logging + final demo walkthrough | All | Health checks |
+|-------|------|------|
+| TPA role | FE B + Backend | Access tests |
+| Event Bus & Webhooks | Backend | Webhook integration |
+| Redis cache | Backend | Cache tests |
+| Analytics dashboards | FE + Backend | Metrics tests |
+| White-label subdomains | Backend | Routing tests |
+| Complete Test Pyramid | All | Full suite |
+| AI evaluation | All | Accuracy tests |
+| Performance testing | All | Load tests |
+| Security review | All | Auth & tenancy verification |
+| Docker & CI/CD | All | Deployment verification |
+| Monitoring & Logging | All | Health checks |
 
-**✅ End of Sprint 4 (Week 8):** the complete platform is built, tested green across the
-pyramid, deployed, and demo-ready.
+### Sprint 4 Goal
 
----
+Production-ready platform.
 
-## 7. Testing strategy (woven through, not bolted on)
+Everything deployed.
 
-| Level | What | Tools | When |
-| ----- | ---- | ----- | ---- |
-| **Unit** | Rules, agents, state transitions, helpers | Jest (FE/Node), pytest (Python) | Every story, every sprint |
-| **Integration** | API ↔ DB ↔ AI engine, submit→decide→settle | Jest/pytest + test DB | Sprints 2–4 |
-| **E2E** | Full user journey across sites + bot | Playwright (web), scripted bot test | Sprints 3–4 |
-| **AI eval** | Agent accuracy vs a labelled synthetic set | `ai/scripts/eval.py` + RAG eval | Sprints 3–4 |
-| **Perf / security** | Load on endpoints/queue; authz, tenancy, secrets, consent | k6/locust + manual review | Sprint 4 |
+Everything tested.
 
-**Rules:** tests ship in the same PR as the feature · CI (GitHub Actions) runs the suite
-on every push and blocks merges on red · seed/synthetic data drives repeatable tests ·
-the E2E happy path must stay green from Sprint 3 onward.
+Demo-ready.
 
 ---
 
-## 8. Reality check
+# 7. Testing Strategy
 
-This delivers the full vision in 8 weeks — it is ambitious. It works **only** if:
-- Each person stays in their lane so four features progress at once.
-- We use managed services (Supabase, Groq, WhatsApp API, hosted UPI) — don't build infra.
-- Scope stays lean: the simplest version of each feature first, polish later.
-- Blockers are surfaced in the daily standup and cleared by pairing, same day.
+| Level | Scope | Tools | Timeline |
+|--------|------|------|----------|
+| **Unit Tests** | Rules, Agents, Helpers | Jest, Pytest | Every sprint |
+| **Integration Tests** | API + Database + AI | Jest, Pytest | Sprint 2 onwards |
+| **E2E Tests** | Complete platform | Playwright | Sprint 3 onwards |
+| **AI Evaluation** | Accuracy & RAG | Evaluation scripts | Sprint 3–4 |
+| **Performance & Security** | Load, Auth, Multi-tenancy | k6, Locust, Manual | Sprint 4 |
 
-If a sprint slips, **protect the E2E demo flow first** (submit → decide → settle →
-notify) and defer the nice-to-haves (white-label, dedicated TPA site, advanced
-analytics) — they're marked as the flexible items above.
+### Testing Rules
 
----
-
-## 9. Backlog (single source of truth)
-
-**Sites & clients** — hospital site · insurer site (+TPA role) · admin site · patient
-WhatsApp bot · patient dashboard · white-label subdomains.
-
-**Core & orchestration** — shared claim record · rules engine · workflow orchestrator
-(state machine) · queue · event bus · webhooks · Redis · UPI settlement · role-scoped
-metrics · admin CRUD.
-
-**AI** — Query-Proofing Agent · Adjudication Assistant · Fraud Detection Agent ·
-Communication Agent · OCR · RAG (3 KBs) · confidence scoring · eval harness.
-
-**Testing & ops** — unit · integration · E2E · AI accuracy · performance · security ·
-Docker · CI/CD · monitoring · demo data.
+- Every feature ships with tests.
+- CI runs on every push.
+- Failed tests block merges.
+- Synthetic demo data keeps tests repeatable.
+- The happy-path E2E test remains green from Sprint 3 onward.
 
 ---
 
-## 10. Legend
+# 8. Reality Check
 
-**FE** Frontend · **BE** Backend · **AI** AI / integrations · **All** whole team.
-Owners are indicative — assign real names at each Friday catch-up.
+This roadmap is ambitious but achievable if:
+
+- Everyone owns their lane.
+- Managed services are used instead of building infrastructure.
+- The first version of every feature stays intentionally simple.
+- Blockers are discussed during the **weekly sync** and resolved immediately afterward.
+
+If time becomes tight, always protect the core demo flow:
+
+**Hospital → AI → Insurer → UPI → WhatsApp**
+
+Nice-to-have features such as advanced analytics, dedicated TPA site, and white-label support can be deferred.
+
+---
+
+# 9. Product Backlog
+
+## Sites
+
+- Hospital Site
+- Insurer Site
+- Admin Site
+- Patient Dashboard
+- WhatsApp Patient Bot
+- White-label Subdomains
+
+## Core Platform
+
+- Shared Claim Record
+- Rules Engine
+- Workflow Orchestrator
+- Queue
+- Event Bus
+- Webhooks
+- Redis
+- UPI Settlement
+- Metrics Dashboard
+- Admin CRUD
+
+## AI
+
+- Query-Proofing Agent
+- Adjudication Assistant
+- Fraud Detection Agent
+- Communication Agent
+- OCR
+- RAG (3 Knowledge Bases)
+- Confidence Scoring
+- AI Evaluation Harness
+
+## Testing & Operations
+
+- Unit Tests
+- Integration Tests
+- End-to-End Tests
+- AI Accuracy Testing
+- Performance Testing
+- Security Review
+- Docker
+- CI/CD
+- Monitoring
+- Demo Data
+
+---
+
+# 10. Legend
+
+- **FE** – Frontend
+- **BE** – Backend
+- **AI** – AI & Integrations
+- **All** – Entire Team
+
+Owners are indicative and can be reassigned during the weekly team sync.
