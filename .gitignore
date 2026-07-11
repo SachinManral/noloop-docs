@@ -1,0 +1,13 @@
+# os / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+
+# editor / IDE
+.vscode/
+.idea/
+
+# env (in case any tooling is added later)
+.env
+.env*.local
+!.env.example
